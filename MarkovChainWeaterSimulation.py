@@ -2,12 +2,11 @@ import numpy as np
 import plotly.graph_objects as go
 from scipy.linalg import solve
 import plotly.io as pio
-
-pio.renderers.default = 'notebook'
 from numpy.linalg import matrix_power
 from IPython.display import display as ipydisplay
 from ipywidgets import interactive, HBox, VBox, widgets, Layout, Button, Output, Dropdown, Checkbox, HTML
 from IPython.display import display
+pio.renderers.default = 'notebook+jupyterlab+plotly_mimetype+notebook_connected'
 
 
 def create_complex_weather_transition_matrix():

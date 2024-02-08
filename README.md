@@ -63,3 +63,6 @@ The simulation offers several customization options, including the ability to ch
 ![image](https://github.com/Flubbeh/WeatherTransitionMarkovModel/assets/26907138/7e9c7d35-07d6-4fb4-a6d0-c99cba07f2cc)
 ![image](https://github.com/Flubbeh/WeatherTransitionMarkovModel/assets/26907138/94b317ed-6b4e-4578-ab73-01a91822d70f)
 ![image](https://github.com/Flubbeh/WeatherTransitionMarkovModel/assets/26907138/6a8af43f-f04d-4cb4-b23e-3b6dacbdf62f)
+![image](https://github.com/Flubbeh/WeatherTransitionMarkovModel/assets/26907138/f9d758a3-70d5-4104-a3a9-c80dcd99b3d2)
+![image](https://github.com/Flubbeh/WeatherTransitionMarkovModel/assets/26907138/e1d2e514-1395-4d42-9482-22f84821ee9f)
+

@@ -48,3 +48,6 @@ pip install numpy plotly ipywidgets IPython
 ## Customization
 
 You can customize the simulation by changing the number of steps, modifying the initial state, or adjusting the transition probabilities using the provided sliders.
+
+![image](https://github.com/Flubbeh/WeatherTransitionMarkovModel/assets/26907138/1899873a-2c1a-452b-b542-5a08480c75aa)
+

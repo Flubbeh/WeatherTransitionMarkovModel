@@ -31,8 +31,6 @@ pip install numpy plotly ipywidgets IPython
 
 ## How to Use
 
-- **Select Initial State**: Choose the initial weather state from the dropdown menu.
-  
 - **Adjust Transition Probabilities**: Use the sliders to adjust the probability of transitioning from one weather state to another. The states include Sunny, Cloudy, Rainy, Snowy, Windy, and Foggy.
 
 - **Set Simulation Steps**: Use the slider to set the number of steps you want the simulation to run.

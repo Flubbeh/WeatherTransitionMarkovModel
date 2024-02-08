@@ -31,7 +31,13 @@ pip install numpy plotly ipywidgets IPython
 
 ## How to Use
 
+- **Select Initial State**: Choose the initial weather state from the dropdown menu.
+  
 - **Adjust Transition Probabilities**: Use the sliders to adjust the probability of transitioning from one weather state to another. The states include Sunny, Cloudy, Rainy, Snowy, Windy, and Foggy.
+
+- **Set Simulation Steps**: Use the slider to set the number of steps you want the simulation to run.
+
+- **Auto-update Model**: Check the "Auto-update" box to automatically apply changes and update the model as you adjust the sliders or the initial state. Uncheck this box if you prefer to manually update the model using the "Update Model" button.
 
 - **Update Model**: After adjusting the probabilities, click the "Update Model" button to apply your changes. This will update the transition matrix and re-run the simulation with your specified parameters.
 
@@ -47,7 +53,9 @@ pip install numpy plotly ipywidgets IPython
 
 ## Customization
 
-You can customize the simulation by changing the number of steps, modifying the initial state, or adjusting the transition probabilities using the provided sliders.
+The simulation offers several customization options, including the ability to change the number of steps, modify the initial state, and adjust the transition probabilities using the provided sliders and dropdown menu.
 
-![image](https://github.com/Flubbeh/WeatherTransitionMarkovModel/assets/26907138/1899873a-2c1a-452b-b542-5a08480c75aa)
+![image](https://github.com/Flubbeh/WeatherTransitionMarkovModel/assets/26907138/7e9c7d35-07d6-4fb4-a6d0-c99cba07f2cc)
+![image](https://github.com/Flubbeh/WeatherTransitionMarkovModel/assets/26907138/94b317ed-6b4e-4578-ab73-01a91822d70f)
+![image](https://github.com/Flubbeh/WeatherTransitionMarkovModel/assets/26907138/6a8af43f-f04d-4cb4-b23e-3b6dacbdf62f)
 

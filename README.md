@@ -1,6 +1,6 @@
 # Interactive Markov Chain Weather Simulation
 
-This project demonstrates an interactive Markov Chain model for simulating complex weather patterns using Python in a Jupyter Notebook environment. It utilizes `numpy` for numerical operations, `plotly.graph_objects` for visualization, `ipywidgets` for interactive UI elements and SciPy for advanced mathematical computations, particularly in solving systems of linear equations which are essential for calculating the steady state distribution and first passage times in the Markov Chain model.
+This project demonstrates an interactive Markov Chain model for simulating complex weather patterns using Python in a Jupyter Notebook environment. It utilizes `numpy` for numerical operations, `plotly.graph_objects` for visualization, `ipywidgets` for interactive UI elements and `SciPy` for advanced mathematical computations, particularly in solving systems of linear equations which are essential for calculating the steady state distribution and first passage times in the Markov Chain model.
 
 ## Getting Started
 

@@ -25,23 +25,76 @@ def create_complex_weather_transition_matrix():
     return matrix
 
 
-def calculate_steady_state(matrix):
-    dim = matrix.shape[0]
-    # Ensure matrix is square
-    if dim != matrix.shape[1]:
-        raise ValueError("Input matrix must be square.")
+def check_regularity_of_transition_matrix(matrix, steps_threshold=100):
+    """
+    Checks if a matrix is regular by raising it to power and checking for all positive entries.
+    """
+    for n in range(1, steps_threshold):
+        powered_matrix = matrix_power(matrix, n)
+        print(f"Matrix ^ {n}:\n{powered_matrix}")  # Debug: print each powered matrix
+        if (powered_matrix > 0).all():
+            return True, n
+    return False, None
 
-    # Adjust matrix to add steady state condition
-    q = matrix[:-1]  # Take all rows except the last to keep matrix square after adding the row of ones
-    q = np.vstack((q, np.ones(dim)))  # Add a row of ones for the steady state condition
+
+def plot_probability_over_time(matrix, initial_state, target_state, steps, states):
+    """
+    Plots the probability of being in the target state over time.
+    """
+    current_state = np.zeros(len(states))
+    current_state[initial_state] = 1  # Set initial state
+    probabilities = [current_state[target_state]]
+
+    for step in range(1, steps):
+        current_state = np.dot(current_state, matrix)
+        probabilities.append(current_state[target_state])
+
+    fig = go.Figure(data=go.Scatter(x=list(range(steps)), y=probabilities))
+    fig.update_layout(
+        title=f"Probability of Being in '{states[target_state]}' State Over Time",
+        xaxis=dict(title="Step"),
+        yaxis=dict(title="Probability")
+    )
+    fig.show()
+
+
+def convergence_proof_with_markov_chains(matrix, states):
+    """
+    Conducts a convergence proof with Markov chains and simplifies the explanation of the results.
+    """
+    is_regular, power = check_regularity_of_transition_matrix(matrix)
+    if is_regular:
+        explanation = (
+            f"The model shows that after {power} transitions, it's possible to go from any weather state to any other. "
+            "This connectivity is a key property for the existence of a steady state, where the system's behavior becomes stable over time.")
+    else:
+        explanation = "The transition matrix is not regular, indicating that some states may not be reachable from others within a certain number of steps."
+
+    print(explanation)
+
+
+def calculate_steady_state(matrix):
+    # Ensure matrix is square and stochastic
+    n = matrix.shape[0]
+    if n != matrix.shape[1]:
+        raise ValueError("Transition matrix must be square.")
+
+    # Validate that each row sums to 1
+    if not np.allclose(matrix.sum(axis=1), np.ones(n)):
+        raise ValueError("Each row of the transition matrix must sum to 1.")
+
+    # Modify matrix to enforce steady state condition
+    A = np.copy(matrix).T - np.eye(n)
+    A[-1] = np.ones(n)
 
     # Create the right-hand side of the equations
-    b = np.zeros(dim)
-    b[-1] = 1  # Set the last element to 1 for the steady state condition
+    b = np.zeros(n)
+    b[-1] = 1  # Enforce the steady state condition
 
     # Solve for the steady state distribution
-    pi = solve(q, b)
-    return pi
+    steady_state = np.linalg.solve(A, b)
+
+    return steady_state
 
 
 def first_passage_times(matrix):
@@ -137,6 +190,21 @@ def interactive_complex_markov_chain(initial_steps=10):
         steps_slider.unobserve(update_model, names='value')
         initial_state_dropdown.unobserve(update_model, names='value')
 
+    target_state_dropdown = Dropdown(options=states, value='Sunny', description='Target State:')
+
+    reset_button = Button(description="Reset")
+
+    def reset_values(b):
+        # Reset all sliders to their initial values from the matrix
+        for i, row in enumerate(sliders):
+            for j, slider in enumerate(row):
+                slider.value = matrix[i][j]
+        initial_state_dropdown.value = 'Sunny'
+        target_state_dropdown.value = 'Sunny'
+        update_model()
+
+    reset_button.on_click(reset_values)
+
     def update_model(change=None):
         with output:
             output.clear_output(wait=True)  # Clear the previous plots
@@ -144,6 +212,13 @@ def interactive_complex_markov_chain(initial_steps=10):
             new_matrix = validate_matrix(new_matrix)  # Normalize the matrix
             initial_state = states.index(initial_state_dropdown.value)
             steps = steps_slider.value
+
+            target_state_index = states.index(target_state_dropdown.value)
+            plot_probability_over_time(new_matrix, initial_state, target_state_index, steps, states)
+
+            convergence_proof_with_markov_chains(new_matrix, states)
+
+            target_state_dropdown.observe(update_model, names='value')
 
             # Plot the transition matrix
             plot_transition_matrix(new_matrix, states)
@@ -172,8 +247,8 @@ def interactive_complex_markov_chain(initial_steps=10):
     update_button.on_click(update_model)
 
     slider_boxes = [VBox([s for s in row]) for row in sliders]
-    ui_components = [intro_text, HBox(slider_boxes), initial_state_dropdown, steps_slider,
-                     auto_update_checkbox, update_button, output]
+    ui_components = [intro_text, HBox(slider_boxes), initial_state_dropdown, target_state_dropdown,
+                     steps_slider, auto_update_checkbox, update_button, reset_button, output]
     ui = VBox(ui_components)
     display(ui)
     update_model()  # Initial call to display the model and simulation

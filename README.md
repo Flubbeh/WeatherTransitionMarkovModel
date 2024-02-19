@@ -40,13 +40,20 @@ pip install numpy plotly ipywidgets IPython scipy
 
 - **Update Model**: After adjusting the probabilities, click the "Update Model" button to apply your changes. This will update the transition matrix and re-run the simulation with your specified parameters.
 
+- **Reset**: Click the "Reset" button to revert all settings to their initial values. This is useful for starting a new simulation from scratch.
+
 - **View Results**: The notebook will display four plots:
+  - **Probability Over Time**: Graphs the probability of being in the target state over time, providing insights into the dynamics of transitioning into the selected state.
   - **Transition Matrix Heatmap**: Shows the probabilities of transitioning from one state to another.
   - **State Distribution Over Time**: Visualizes the probability of being in each state over a series of steps, based on the initial state and the transition matrix.
   - **Steady State Distribution**: A bar chart that represents the long-term or steady state distribution of the weather states. This distribution indicates the probability of being in each state after a large number of steps, providing insight into the long-term behavior of the weather system under the current transition probabilities.
   - **First Passage Times**: A heatmap showing the expected number of steps required to first transition from one state to another. This visualization offers an understanding of how quickly or slowly the system might transition into each state for the first time from a given starting state.
 
 ## Understanding the Model
+
+- **Probability Over Time**: This feature allows users to visualize the probability of transitioning to a specific target state over time.
+
+- **Convergence Proof**: The `convergence_proof_with_markov_chains` function assesses whether the Markov chain will reach a steady state by checking for matrix regularity.
 
 - **Transition Matrix**: A square matrix used to describe the transitions between discrete states in a Markov chain. Each cell in the matrix represents the probability of moving from one state (row) to another state (column).
 
@@ -61,7 +68,9 @@ pip install numpy plotly ipywidgets IPython scipy
 
 The simulation offers several customization options, including the ability to change the number of steps, modify the initial state, and adjust the transition probabilities using the provided sliders and dropdown menu.
 
-![image](https://github.com/Flubbeh/WeatherTransitionMarkovModel/assets/26907138/7e9c7d35-07d6-4fb4-a6d0-c99cba07f2cc)
+![image](https://github.com/Flubbeh/WeatherTransitionMarkovModel/assets/26907138/348d4b2c-c715-4197-acbb-22cbc90a87c4)
+![image](https://github.com/Flubbeh/WeatherTransitionMarkovModel/assets/26907138/bcb69597-696b-4897-9246-09484ea60550)
+![image](https://github.com/Flubbeh/WeatherTransitionMarkovModel/assets/26907138/063c5c9e-baaf-43d4-b8b4-427478e83288)
 ![image](https://github.com/Flubbeh/WeatherTransitionMarkovModel/assets/26907138/94b317ed-6b4e-4578-ab73-01a91822d70f)
 ![image](https://github.com/Flubbeh/WeatherTransitionMarkovModel/assets/26907138/6a8af43f-f04d-4cb4-b23e-3b6dacbdf62f)
 ![image](https://github.com/Flubbeh/WeatherTransitionMarkovModel/assets/26907138/f9d758a3-70d5-4104-a3a9-c80dcd99b3d2)
